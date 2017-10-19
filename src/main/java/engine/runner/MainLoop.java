@@ -1,5 +1,6 @@
 package engine.runner;
 
+import engine.entities.Entity;
 import engine.model.TexturedModel;
 import engine.model.loaders.Loader;
 import engine.model.RawModel;
@@ -9,6 +10,7 @@ import engine.render.Render;
 import engine.shaders.ShaderLoader;
 import engine.shaders.ShaderService;
 import org.lwjgl.opengl.Display;
+import org.lwjgl.util.vector.Vector3f;
 
 public class MainLoop {
 
@@ -18,7 +20,7 @@ public class MainLoop {
 
         Loader loader = new Loader();
         Render render = new Render();
-        ShaderService shaderService = new ShaderLoader();
+        ShaderLoader shaderService = new ShaderLoader();
 
         float[] vertices = {
                 -0.5f, 0.5f, 0.0f,
@@ -42,12 +44,16 @@ public class MainLoop {
         ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\mur_tex.png"));
         TexturedModel texturedModel = new TexturedModel(model, texture);
 
+        Entity entity = new Entity(texturedModel, new Vector3f(-1, 0, 0), new Vector3f(0, 0, 0), 1);
+
         while (!Display.isCloseRequested()) {
+            entity.updatePosition(0.002f, 0.0f, 0.0f);
+            entity.updateRotation(0, 1, 0);
 
             render.setUp();
             shaderService.start();
 
-            render.render(texturedModel);
+            render.render(entity, shaderService);
 
             shaderService.stop();
             DisplayManager.updateDisplay();

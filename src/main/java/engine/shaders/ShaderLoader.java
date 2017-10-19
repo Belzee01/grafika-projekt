@@ -8,6 +8,7 @@ public class ShaderLoader extends ShaderService {
     private static final String FRAGMENT_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\java\\engine\\shaders\\definitions\\fragmentShader.txt";
 
     private int transformationMatrixLocation;
+    private int projectionMatrixLocation;
 
     public ShaderLoader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -16,15 +17,20 @@ public class ShaderLoader extends ShaderService {
     @Override
     protected void bindAttributes() {
         super.bindAttribute(0, "position");
-        super.bindAttribute(1, "textureCoords");
+        super.bindAttribute(1, "textureCoordinates");
     }
 
     @Override
     protected void getAllUniformLocations() {
         transformationMatrixLocation = super.getUniformLocation("transformationMatrix");
+        projectionMatrixLocation = super.getUniformLocation("projectionMatrix");
     }
 
     public void loadTransformationMatrix(Matrix4f matrix) {
         super.loadMatrix(transformationMatrixLocation, matrix);
+    }
+
+    public void loadProjectionMatrix(Matrix4f matrix) {
+        super.loadMatrix(projectionMatrixLocation, matrix);
     }
 }
