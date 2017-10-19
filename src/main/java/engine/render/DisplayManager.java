@@ -17,8 +17,8 @@ public class DisplayManager {
 
         try {
             Display.setDisplayMode(new DisplayMode(WIDTH, HEIGHT));
-
             Display.create(new PixelFormat(), attribs);
+            Display.setTitle("Graphics Project");
         } catch (LWJGLException e) {
             e.printStackTrace();
         }
@@ -27,7 +27,7 @@ public class DisplayManager {
     }
 
     public static void updateDisplay() {
-        Display.sync(60);
+        Display.sync(FPS_CAP);
         Display.update();
     }
 
