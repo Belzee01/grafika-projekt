@@ -15,23 +15,6 @@
         <junit.version>4.10</junit.version>
     </properties>
 
-    <repositories>
-        <repository>
-            <id>mavenNatives</id>
-            <name>Maven Natives Repository</name>
-            <url>http://mavennatives.googlecode.com/svn/repo</url>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-        </repository>
-
-        <repository>
-            <id>slick</id>
-            <name>slick</name>
-            <url>http://slick.cokeandcode.com/mavenrepo</url>
-        </repository>
-    </repositories>
-
     <dependencies>
         <dependency>
             <groupId>org.lwjgl.lwjgl</groupId>
@@ -39,15 +22,26 @@
             <version>${lwjgl.version}</version>
         </dependency>
         <dependency>
-            <groupId>java3d</groupId>
-            <artifactId>vecmath</artifactId>
-            <version>1.3.1</version>
+            <groupId>org.lwjgl.lwjgl</groupId>
+            <artifactId>lwjgl_util</artifactId>
+            <version>${lwjgl.version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.slick2d</groupId>
+            <artifactId>slick2d-core</artifactId>
+            <version>1.0.2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.lwjgl.lwjgl</groupId>
+                    <artifactId>lwjgl</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.projectlombok</groupId>
@@ -66,22 +60,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                 </configuration>
-            </plugin>
-
-            <plugin>
-                <groupId>com.googlecode.mavennatives</groupId>
-                <artifactId>maven-nativedependencies-plugin</artifactId>
-                <version>${natives.version}</version>
-                <executions>
-                    <execution>
-                        <id>unpacknatives</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <!--suppress MavenModelInspection (this line is for IDEA)-->
-                            <goal>copy</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

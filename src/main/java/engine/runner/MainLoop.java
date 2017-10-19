@@ -1,7 +1,9 @@
 package engine.runner;
 
-import engine.model.Loader;
+import engine.model.TexturedModel;
+import engine.model.loaders.Loader;
 import engine.model.RawModel;
+import engine.model.textures.ModelTexture;
 import engine.render.DisplayManager;
 import engine.render.Render;
 import engine.shaders.ShaderLoader;
@@ -29,14 +31,23 @@ public class MainLoop {
                 0, 1, 3, 3, 1, 2
         };
 
-        RawModel model = loader.loadToVAO(vertices, indices);
+        float[] textureCoords = {
+                0, 0,
+                0, 1,
+                1, 1,
+                1, 0
+        };
+
+        RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
+        ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\mur_tex.png"));
+        TexturedModel texturedModel = new TexturedModel(model, texture);
 
         while (!Display.isCloseRequested()) {
 
             render.setUp();
             shaderService.start();
 
-            render.render(model);
+            render.render(texturedModel);
 
             shaderService.stop();
             DisplayManager.updateDisplay();
