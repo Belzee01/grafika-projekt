@@ -35,7 +35,7 @@ public class Loader {
     public int loadTexture(String filename) {
         Texture texture = null;
         try {
-            texture = TextureLoader.getTexture("PNG", new FileInputStream(filename));
+            texture = TextureLoader.getTexture("PNG", ClassLoader.getSystemClassLoader().getResourceAsStream(filename));
             int textureId = texture.getTextureID();
             textureIds.add(textureId);
             return textureId;

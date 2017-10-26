@@ -41,7 +41,7 @@ public class MainLoop {
         };
 
         RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\mur_tex.png"));
+        ModelTexture texture = new ModelTexture(loader.loadTexture("mur_tex.png"));
         TexturedModel texturedModel = new TexturedModel(model, texture);
 
         Entity entity = new Entity(texturedModel, new Vector3f(-1, 0, 0), new Vector3f(0, 0, 0), 1);

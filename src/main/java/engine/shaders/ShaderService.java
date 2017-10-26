@@ -5,11 +5,14 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
+import sun.misc.IOUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.FloatBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Scanner;
 
 public abstract class ShaderService {
 
@@ -93,12 +96,20 @@ public abstract class ShaderService {
     }
 
 
-    private static String loadFile(String file) {
-        try {
-            return new String(Files.readAllBytes(Paths.get(file)));
+    private static String loadFile(String fileName) {
+
+        StringBuilder result = new StringBuilder("");
+        File file = new File(ClassLoader.getSystemClassLoader().getResource(fileName).getFile());
+
+        try (Scanner scanner = new Scanner(file)) {
+            while (scanner.hasNextLine()) {
+                String line = scanner.nextLine();
+                result.append(line).append("\n");
+            }
+            scanner.close();
         } catch (IOException e) {
             e.printStackTrace();
-            throw new RuntimeException("Failed to load the file : " + file);
         }
+        return result.toString();
     }
 }
