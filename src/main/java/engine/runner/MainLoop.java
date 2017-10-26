@@ -39,7 +39,7 @@ public class MainLoop {
         };
 
         RawModel model = loader.loadToVAO(vertices, textureCoords, indices);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\mur_tex.png"));
+        ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\mur_tex.png"));
         TexturedModel texturedModel = new TexturedModel(model, texture);
 
         while (!Display.isCloseRequested()) {

@@ -4,8 +4,8 @@ import org.lwjgl.util.vector.Matrix4f;
 
 public class ShaderLoader extends ShaderService {
 
-    private static final String VERTEX_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\java\\engine\\shaders\\definitions\\vertexShader.txt";
-    private static final String FRAGMENT_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\java\\engine\\shaders\\definitions\\fragmentShader.txt";
+    private static final String VERTEX_FILE = "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\java\\engine\\shaders\\definitions\\vertexShader.txt";
+    private static final String FRAGMENT_FILE = "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\java\\engine\\shaders\\definitions\\fragmentShader.txt";
 
     private int transformationMatrixLocation;
 
