@@ -1,5 +1,7 @@
 package engine.shaders;
 
+import engine.entities.Camera;
+import engine.mathutils.Maths;
 import org.lwjgl.util.vector.Matrix4f;
 
 public class ShaderLoader extends ShaderService {
@@ -9,6 +11,7 @@ public class ShaderLoader extends ShaderService {
 
     private int transformationMatrixLocation;
     private int projectionMatrixLocation;
+    private int viewMatrixLocation;
 
     public ShaderLoader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -24,6 +27,7 @@ public class ShaderLoader extends ShaderService {
     protected void getAllUniformLocations() {
         transformationMatrixLocation = super.getUniformLocation("transformationMatrix");
         projectionMatrixLocation = super.getUniformLocation("projectionMatrix");
+        viewMatrixLocation = super.getUniformLocation("viewMatrix");
     }
 
     public void loadTransformationMatrix(Matrix4f matrix) {
@@ -32,5 +36,10 @@ public class ShaderLoader extends ShaderService {
 
     public void loadProjectionMatrix(Matrix4f matrix) {
         super.loadMatrix(projectionMatrixLocation, matrix);
+    }
+
+    public void loadViewMatrix(Camera camera) {
+        Matrix4f viewMatrix = Maths.createViewMatrix(camera);
+        super.loadMatrix(viewMatrixLocation, viewMatrix);
     }
 }

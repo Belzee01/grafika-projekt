@@ -16,9 +16,17 @@ public class Render {
 
     private Matrix4f projectionMatrix = new Matrix4f();
 
+    public Render(ShaderLoader shaderLoader) {
+        createProjectionMatrix();
+        shaderLoader.start();
+        shaderLoader.loadProjectionMatrix(projectionMatrix);
+        shaderLoader.stop();
+    }
+
     public void setUp() {
+        GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glClearColor(1, 0, 0, 1);
-        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT);
+        GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
     }
 
     public void render(Entity entity, ShaderLoader shaderLoader) {
@@ -44,7 +52,17 @@ public class Render {
     }
 
     private void createProjectionMatrix() {
-        float spectRation = (float) Display.getWidth() / (float) Display.getHeight();
-        float yScale = 0;
+        float aspectRatio = (float) Display.getWidth() / (float) Display.getHeight();
+        float yScale = (float) ((1f / Math.tan(Math.toRadians(FOV / 2f))) * aspectRatio);
+        float xScale = yScale / aspectRatio;
+        float frustumLength = FAR_PLANE - NEAR_PLANE;
+
+        projectionMatrix = new Matrix4f();
+        projectionMatrix.m00 = xScale;
+        projectionMatrix.m11 = yScale;
+        projectionMatrix.m22 = -((FAR_PLANE + NEAR_PLANE) / frustumLength);
+        projectionMatrix.m23 = -1;
+        projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustumLength);
+        projectionMatrix.m33 = 0;
     }
 }

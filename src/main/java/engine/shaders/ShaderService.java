@@ -6,10 +6,9 @@ import org.lwjgl.opengl.GL20;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
-import java.io.IOException;
 import java.nio.FloatBuffer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import static engine.utils.Utils.loadFile;
 
 public abstract class ShaderService {
 
@@ -90,15 +89,5 @@ public abstract class ShaderService {
         GL20.glDeleteShader(vertexShaderId);
         GL20.glDeleteShader(fragmentShaderId);
         GL20.glDeleteProgram(programId);
-    }
-
-
-    private static String loadFile(String file) {
-        try {
-            return new String(Files.readAllBytes(Paths.get(file)));
-        } catch (IOException e) {
-            e.printStackTrace();
-            throw new RuntimeException("Failed to load the file : " + file);
-        }
     }
 }
