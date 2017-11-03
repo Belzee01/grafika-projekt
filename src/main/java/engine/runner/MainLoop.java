@@ -2,6 +2,7 @@ package engine.runner;
 
 import engine.entities.Camera;
 import engine.entities.Entity;
+import engine.entities.Light;
 import engine.model.RawModel;
 import engine.model.TexturedModel;
 import engine.model.loaders.Loader;
@@ -23,11 +24,13 @@ public class MainLoop {
         ShaderLoader shaderService = new ShaderLoader();
         Render render = new Render(shaderService);
 
-        RawModel model = OBJLoader.loadObjModel("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\models\\stall\\stall.obj", loader);
+        RawModel model = OBJLoader.loadObjModel("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\models\\dragon.obj", loader);
         ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\models\\stall\\stallTexture.png"));
         TexturedModel texturedModel = new TexturedModel(model, texture);
 
         Entity entity = new Entity(texturedModel, new Vector3f(-1, 0, -50), new Vector3f(0, 0, 0), 1);
+
+        Light light = new Light(new Vector3f(0, 0, -20), new Vector3f(1, 1,1));
 
         Camera camera = new Camera();
 
@@ -39,6 +42,7 @@ public class MainLoop {
             render.setUp();
             shaderService.start();
 
+            shaderService.loadLight(light);
             shaderService.loadViewMatrix(camera);
 
             render.render(entity, shaderService);

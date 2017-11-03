@@ -1,6 +1,7 @@
 package engine.shaders;
 
 import engine.entities.Camera;
+import engine.entities.Light;
 import engine.mathutils.Maths;
 import org.lwjgl.util.vector.Matrix4f;
 
@@ -12,6 +13,8 @@ public class ShaderLoader extends ShaderService {
     private int transformationMatrixLocation;
     private int projectionMatrixLocation;
     private int viewMatrixLocation;
+    private int lightPositionLocation;
+    private int lightColourLocation;
 
     public ShaderLoader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
@@ -21,6 +24,7 @@ public class ShaderLoader extends ShaderService {
     protected void bindAttributes() {
         super.bindAttribute(0, "position");
         super.bindAttribute(1, "textureCoordinates");
+        super.bindAttribute(2, "normal");
     }
 
     @Override
@@ -28,6 +32,8 @@ public class ShaderLoader extends ShaderService {
         transformationMatrixLocation = super.getUniformLocation("transformationMatrix");
         projectionMatrixLocation = super.getUniformLocation("projectionMatrix");
         viewMatrixLocation = super.getUniformLocation("viewMatrix");
+        lightPositionLocation = super.getUniformLocation("lightPosition");
+        lightColourLocation = super.getUniformLocation("lightColour");
     }
 
     public void loadTransformationMatrix(Matrix4f matrix) {
@@ -41,5 +47,10 @@ public class ShaderLoader extends ShaderService {
     public void loadViewMatrix(Camera camera) {
         Matrix4f viewMatrix = Maths.createViewMatrix(camera);
         super.loadMatrix(viewMatrixLocation, viewMatrix);
+    }
+
+    public void loadLight(Light light) {
+        super.loadVector(lightPositionLocation, light.getPosition());
+        super.loadVector(lightColourLocation, light.getColour());
     }
 }

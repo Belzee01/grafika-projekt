@@ -17,6 +17,8 @@ public class Render {
     private Matrix4f projectionMatrix = new Matrix4f();
 
     public Render(ShaderLoader shaderLoader) {
+        GL11.glEnable(GL11.GL_CULL_FACE);
+        GL11.glEnable(GL11.GL_BACK);
         createProjectionMatrix();
         shaderLoader.start();
         shaderLoader.loadProjectionMatrix(projectionMatrix);
@@ -37,6 +39,7 @@ public class Render {
 
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
+        GL20.glEnableVertexAttribArray(2);
 
         Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(), entity.getRotation(), entity.getScale());
         shaderLoader.loadTransformationMatrix(transformationMatrix);
@@ -47,6 +50,7 @@ public class Render {
 
         GL20.glDisableVertexAttribArray(0);
         GL20.glDisableVertexAttribArray(1);
+        GL20.glDisableVertexAttribArray(2);
 
         GL30.glBindVertexArray(0);
     }

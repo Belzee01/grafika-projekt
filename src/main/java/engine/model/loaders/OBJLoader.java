@@ -1,7 +1,6 @@
 package engine.model.loaders;
 
 import engine.model.RawModel;
-import engine.model.loaders.Loader;
 import org.lwjgl.util.vector.Vector2f;
 import org.lwjgl.util.vector.Vector3f;
 
@@ -67,7 +66,7 @@ public class OBJLoader {
             e.printStackTrace();
         }
 
-        verticesArray = new float[vertices.size()*3];
+        verticesArray = new float[vertices.size() * 3];
         indicesArray = new int[indicies.size()];
 
         int vertexCounter = 0;
@@ -82,7 +81,7 @@ public class OBJLoader {
             indicesArray[indicesCounter++] = i;
         }
 
-        return loader.loadToVAO(verticesArray, textureArray[0], indicesArray);
+        return loader.loadToVAO(verticesArray, textureArray[0], normalsArray[0], indicesArray);
     }
 
     private static void processVertex(
