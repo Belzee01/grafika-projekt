@@ -9,50 +9,64 @@ import engine.model.loaders.Loader;
 import engine.model.textures.ModelTexture;
 import engine.render.DisplayManager;
 import engine.model.loaders.OBJLoader;
-import engine.render.Render;
+import engine.render.EntityRender;
+import engine.render.MainRender;
 import engine.shaders.ShaderLoader;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 public class MainLoop {
 
     public static void main(String[] args) {
 
         DisplayManager.createDisplay();
-
         Loader loader = new Loader();
-        ShaderLoader shaderService = new ShaderLoader();
-        Render render = new Render(shaderService);
 
-        RawModel model = OBJLoader.loadObjModel("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\models\\dragon.obj", loader);
-        ModelTexture texture = new ModelTexture(loader.loadTexture("C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\models\\stall\\stallTexture.png"));
-        TexturedModel texturedModel = new TexturedModel(model, texture);
 
-        Entity entity = new Entity(texturedModel, new Vector3f(-1, 0, -50), new Vector3f(0, 0, 0), 1);
+        RawModel model = OBJLoader.loadObjModel("tree", loader);
 
-        Light light = new Light(new Vector3f(0, 0, -20), new Vector3f(1, 1,1));
+        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("tree")));
+
+        List<Entity> entities = new ArrayList<Entity>();
+        Random random = new Random();
+        for (int i = 0; i < 500; i++) {
+            entities.add(
+                    new Entity(
+                            staticModel,
+                            new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600),
+                            new Vector3f(0f, 0f, 0f),
+                            3
+                    )
+            );
+        }
+
+        Light light = new Light(new Vector3f(20000, 20000, 2000), new Vector3f(1, 1, 1));
+
+//        Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
+//        Terrain terrain2 = new Terrain(1,0,loader,new ModelTexture(loader.loadTexture("grass")));
 
         Camera camera = new Camera();
+        MainRender renderer = new MainRender();
 
         while (!Display.isCloseRequested()) {
-            entity.updateRotation(0.0f, 1f, .0f);
-
             camera.move();
 
-            render.setUp();
-            shaderService.start();
-
-            shaderService.loadLight(light);
-            shaderService.loadViewMatrix(camera);
-
-            render.render(entity, shaderService);
-
-            shaderService.stop();
+//            renderer.processTerrain(terrain);
+//            renderer.processTerrain(terrain2);
+            for (Entity entity : entities) {
+                renderer.processEntity(entity);
+            }
+            renderer.render(light, camera);
             DisplayManager.updateDisplay();
         }
 
-        shaderService.cleanUp();
+        renderer.cleanUp();
         loader.cleanUpMemory();
         DisplayManager.closeDisplay();
+
     }
 }

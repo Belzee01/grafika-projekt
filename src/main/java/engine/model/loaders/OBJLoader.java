@@ -25,7 +25,7 @@ public class OBJLoader {
         final float[][] textureArray = {null};
         int[] indicesArray = null;
 
-        try (Stream<String> stream = Files.lines(Paths.get(fileName))) {
+        try (Stream<String> stream = Files.lines(Paths.get("C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\" + fileName + ".obj"))) {
 
             stream.forEach(line -> {
                 String[] currentLine = line.split(" ");

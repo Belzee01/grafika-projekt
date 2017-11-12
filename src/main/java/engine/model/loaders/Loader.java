@@ -38,7 +38,9 @@ public class Loader {
     public int loadTexture(String filename) {
         Texture texture = null;
         try {
-            texture = TextureLoader.getTexture("PNG", new FileInputStream(filename));
+            texture = TextureLoader.getTexture("PNG", new FileInputStream(
+                    "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\" + filename + ".png"
+            ));
             int textureId = texture.getTextureID();
             textureIds.add(textureId);
             return textureId;
