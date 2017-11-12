@@ -25,21 +25,25 @@ public class MainLoop {
         DisplayManager.createDisplay();
         Loader loader = new Loader();
 
-        RawModel model = OBJLoader.loadObjModel("tree", loader);
-
-        TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("tree")));
-
         List<Entity> entities = new ArrayList<>();
         Random random = new Random();
-        for (int i = 0; i < 500; i++) {
-            entities.add(
-                    new Entity(
-                            staticModel,
-                            new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600),
-                            new Vector3f(0f, 0f, 0f),
-                            3
-                    )
-            );
+
+        RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
+        TexturedModel fernTexturedModel = new TexturedModel(fernModel, new ModelTexture(loader.loadTexture("fern")));
+        for (int i = 0; i < 100; i++) {
+            entities.add(new Entity(fernTexturedModel, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600), new Vector3f(0f, 0f, 0f), 3));
+        }
+
+        RawModel grassModel = OBJLoader.loadObjModel("grassModel", loader);
+        TexturedModel grassTexturedModel = new TexturedModel(grassModel, new ModelTexture(loader.loadTexture("grassTexture")));
+        for (int i = 0; i < 100; i++) {
+            entities.add(new Entity(grassTexturedModel, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600), new Vector3f(0f, 0f, 0f), 3));
+        }
+
+        RawModel lowPolyTreeModel = OBJLoader.loadObjModel("lowPolyTree", loader);
+        TexturedModel lowPolyTreeTexturedModel = new TexturedModel(lowPolyTreeModel, new ModelTexture(loader.loadTexture("lowPolyTree")));
+        for (int i = 0; i < 100; i++) {
+            entities.add(new Entity(lowPolyTreeTexturedModel, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600), new Vector3f(0f, 0f, 0f), 3));
         }
 
         Light light = new Light(new Vector3f(20000, 20000, 2000), new Vector3f(1, 1, 1));
