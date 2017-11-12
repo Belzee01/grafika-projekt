@@ -55,9 +55,11 @@ public class MainLoop {
 
             renderer.processTerrain(terrain);
             renderer.processTerrain(terrain2);
+
             for (Entity entity : entities) {
                 renderer.processEntity(entity);
             }
+
             renderer.render(light, camera);
             DisplayManager.updateDisplay();
         }

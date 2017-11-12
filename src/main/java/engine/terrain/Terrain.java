@@ -27,6 +27,7 @@ public class Terrain {
     }
 
     private RawModel generateTerrain(Loader loader) {
+
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[] vertices = new float[count * 3];
         float[] normals = new float[count * 3];

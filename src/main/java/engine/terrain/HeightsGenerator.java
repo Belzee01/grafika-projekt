@@ -14,7 +14,7 @@ public class HeightsGenerator {
     }
 
     public float generateHeight(int x, int z) {
-        return 0.0f;
+        return 1.0f;
     }
 
 }
