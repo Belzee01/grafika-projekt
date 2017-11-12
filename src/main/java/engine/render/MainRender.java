@@ -5,6 +5,7 @@ import engine.entities.Entity;
 import engine.entities.Light;
 import engine.model.TexturedModel;
 import engine.shaders.ShaderLoader;
+import engine.shaders.TerrainShader;
 import engine.terrain.Terrain;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.GL11;
@@ -24,35 +25,43 @@ public class MainRender {
     private Matrix4f projectionMatrix;
 
     private ShaderLoader shader = new ShaderLoader();
-    private EntityRender renderer;
+    private EntityRender entityRender;
 
-//    private TerrainRenderer terrainRenderer;
-//    private TerrainShader terrainShader = new TerrainShader();
+    private TerrainRender terrainRenderer;
+    private TerrainShader terrainShader = new TerrainShader();
 
 
-    private Map<TexturedModel, List<Entity>> entities = new HashMap<TexturedModel, List<Entity>>();
-    private List<Terrain> terrains = new ArrayList<Terrain>();
+    private Map<TexturedModel, List<Entity>> entities = new HashMap<>();
+    private List<Terrain> terrains = new ArrayList<>();
 
     public MainRender() {
         GL11.glEnable(GL11.GL_CULL_FACE);
         GL11.glCullFace(GL11.GL_BACK);
+
         createProjectionMatrix();
-        renderer = new EntityRender(shader, projectionMatrix);
-//        terrainRenderer = new TerrainRenderer(terrainShader,projectionMatrix);
+        entityRender = new EntityRender(shader, projectionMatrix);
+        terrainRenderer = new TerrainRender(terrainShader, projectionMatrix);
     }
 
     public void render(Light sun, Camera camera) {
         setUp();
+
         shader.start();
         shader.loadLight(sun);
         shader.loadViewMatrix(camera);
-        renderer.render(entities);
+
+        entityRender.render(entities);
+
         shader.stop();
-//        terrainShader.start();
-//        terrainShader.loadLight(sun);
-//        terrainShader.loadViewMatrix(camera);
-//        terrainRenderer.render(terrains);
-//        terrainShader.stop();
+
+        terrainShader.start();
+        terrainShader.loadLight(sun);
+        terrainShader.loadViewMatrix(camera);
+
+        terrainRenderer.render(terrains);
+
+        terrainShader.stop();
+
         terrains.clear();
         entities.clear();
     }
@@ -81,7 +90,7 @@ public class MainRender {
 
     public void cleanUp() {
         shader.cleanUp();
-//        terrainShader.cleanUp();
+        terrainShader.cleanUp();
     }
 
     private void createProjectionMatrix() {
@@ -98,5 +107,4 @@ public class MainRender {
         projectionMatrix.m32 = -((2 * NEAR_PLANE * FAR_PLANE) / frustum_length);
         projectionMatrix.m33 = 0;
     }
-
 }

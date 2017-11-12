@@ -5,10 +5,10 @@ import engine.entities.Light;
 import engine.mathutils.Maths;
 import org.lwjgl.util.vector.Matrix4f;
 
-public class ShaderLoader extends ShaderService {
+public class TerrainShader extends ShaderService {
 
-    private static final String VERTEX_FILE = "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\shaders\\" + "vertexShader.txt";
-    private static final String FRAGMENT_FILE = "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\shaders\\" + "fragmentShader.txt";
+    private static final String VERTEX_FILE = "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\shaders\\" + "terrainVertexShader.txt";
+    private static final String FRAGMENT_FILE = "C:\\Users\\Kajetan\\IntelliJProjects\\grafika-projekt\\src\\main\\resources\\shaders\\" + "terrainFragmentShader.txt";
 
     private int location_transformationMatrix;
     private int location_projectionMatrix;
@@ -18,7 +18,7 @@ public class ShaderLoader extends ShaderService {
     private int location_shineDamper;
     private int location_reflectivity;
 
-    public ShaderLoader() {
+    public TerrainShader() {
         super(VERTEX_FILE, FRAGMENT_FILE);
     }
 

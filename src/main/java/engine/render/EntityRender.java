@@ -16,7 +16,7 @@ public class EntityRender {
 
     private ShaderLoader shader;
 
-    public EntityRender(ShaderLoader shader, Matrix4f projectionMatrix) {
+    public EntityRender(ShaderLoader shader,Matrix4f projectionMatrix) {
         this.shader = shader;
         shader.start();
         shader.loadProjectionMatrix(projectionMatrix);
@@ -43,6 +43,7 @@ public class EntityRender {
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
         ModelTexture texture = model.getTexture();
+        shader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getTextureId());
     }
@@ -55,10 +56,8 @@ public class EntityRender {
     }
 
     private void prepareInstance(Entity entity) {
-        Matrix4f transformationMatrix = Maths.createTransformationMatrix(
-                entity.getPosition(),
-                entity.getRotation(),
-                entity.getScale());
+        Matrix4f transformationMatrix = Maths.createTransformationMatrix(entity.getPosition(),
+                entity.getRotation(), entity.getScale());
         shader.loadTransformationMatrix(transformationMatrix);
     }
 }
