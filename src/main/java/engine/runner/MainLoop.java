@@ -29,13 +29,15 @@ public class MainLoop {
         Random random = new Random();
 
         RawModel fernModel = OBJLoader.loadObjModel("fern", loader);
-        TexturedModel fernTexturedModel = new TexturedModel(fernModel, new ModelTexture(loader.loadTexture("fern")));
+        TexturedModel fernTexturedModel = new TexturedModel(fernModel, new ModelTexture(loader.loadTexture("fern")).setHasTransparency(true));
         for (int i = 0; i < 100; i++) {
             entities.add(new Entity(fernTexturedModel, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600), new Vector3f(0f, 0f, 0f), 3));
         }
 
         RawModel grassModel = OBJLoader.loadObjModel("grassModel", loader);
-        TexturedModel grassTexturedModel = new TexturedModel(grassModel, new ModelTexture(loader.loadTexture("grassTexture")));
+        TexturedModel grassTexturedModel = new TexturedModel(grassModel, new ModelTexture(loader.loadTexture("grassTexture"))
+                .setHasTransparency(true)
+                .setFakeLighting(true));
         for (int i = 0; i < 100; i++) {
             entities.add(new Entity(grassTexturedModel, new Vector3f(random.nextFloat() * 800 - 400, 0, random.nextFloat() * -600), new Vector3f(0f, 0f, 0f), 3));
         }
