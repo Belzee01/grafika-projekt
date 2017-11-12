@@ -39,11 +39,14 @@ public class EntityRender {
     private void prepareTexturedModel(TexturedModel model) {
         RawModel rawModel = model.getRawModel();
         GL30.glBindVertexArray(rawModel.getVaoId());
+
         GL20.glEnableVertexAttribArray(0);
         GL20.glEnableVertexAttribArray(1);
         GL20.glEnableVertexAttribArray(2);
+
         ModelTexture texture = model.getTexture();
         shader.loadShineVariables(texture.getShineDamper(), texture.getReflectivity());
+
         GL13.glActiveTexture(GL13.GL_TEXTURE0);
         GL11.glBindTexture(GL11.GL_TEXTURE_2D, model.getTexture().getTextureId());
     }

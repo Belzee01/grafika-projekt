@@ -6,12 +6,10 @@ import engine.entities.Light;
 import engine.model.RawModel;
 import engine.model.TexturedModel;
 import engine.model.loaders.Loader;
+import engine.model.loaders.OBJLoader;
 import engine.model.textures.ModelTexture;
 import engine.render.DisplayManager;
-import engine.model.loaders.OBJLoader;
-import engine.render.EntityRender;
 import engine.render.MainRender;
-import engine.shaders.ShaderLoader;
 import engine.terrain.Terrain;
 import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Vector3f;
@@ -31,7 +29,7 @@ public class MainLoop {
 
         TexturedModel staticModel = new TexturedModel(model, new ModelTexture(loader.loadTexture("tree")));
 
-        List<Entity> entities = new ArrayList<Entity>();
+        List<Entity> entities = new ArrayList<>();
         Random random = new Random();
         for (int i = 0; i < 500; i++) {
             entities.add(
@@ -46,8 +44,8 @@ public class MainLoop {
 
         Light light = new Light(new Vector3f(20000, 20000, 2000), new Vector3f(1, 1, 1));
 
-        Terrain terrain = new Terrain(0,0,loader,new ModelTexture(loader.loadTexture("grass")));
-        Terrain terrain2 = new Terrain(1,0,loader,new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")));
+        Terrain terrain2 = new Terrain(1, 0, loader, new ModelTexture(loader.loadTexture("grass")));
 
         Camera camera = new Camera();
         MainRender renderer = new MainRender();
@@ -57,9 +55,9 @@ public class MainLoop {
 
             renderer.processTerrain(terrain);
             renderer.processTerrain(terrain2);
-//            for (Entity entity : entities) {
-//                renderer.processEntity(entity);
-//            }
+            for (Entity entity : entities) {
+                renderer.processEntity(entity);
+            }
             renderer.render(light, camera);
             DisplayManager.updateDisplay();
         }
