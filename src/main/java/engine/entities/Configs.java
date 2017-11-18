@@ -12,7 +12,7 @@ public class Configs {
 
 	public static final int TERRAIN_SIZE = 100;
 
-	public static final float AMPLITUDE = 70;
+	public static final float AMPLITUDE = 110;
 	public static final float ROUGHNESS = 0.35f;
 	public static final int OCTAVES = 5;
 

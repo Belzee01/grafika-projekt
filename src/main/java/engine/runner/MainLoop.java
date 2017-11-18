@@ -19,8 +19,9 @@ public class MainLoop {
         Loader loader = new Loader();
 
         Light light = new Light(Configs.LIGHT_POS, Configs.LIGHT_COL);
-        HeightsGenerator generator = new HeightsGenerator(1, Configs.OCTAVES, Configs.AMPLITUDE, Configs.ROUGHNESS);
-        Terrain terrain = new Terrain(0, 0, loader, new ModelTexture(loader.loadTexture("grass")), generator);
+        HeightsGenerator generator = new HeightsGenerator(111111, Configs.OCTAVES, Configs.AMPLITUDE, Configs.ROUGHNESS);
+        Terrain terrain = new Terrain(-1, -1, loader, new ModelTexture(loader.loadTexture("grass")), generator);
+
 
         Camera camera = new Camera();
         MainRender renderer = new MainRender();

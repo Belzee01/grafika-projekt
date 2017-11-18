@@ -22,8 +22,8 @@ public class Terrain {
 
     public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture, HeightsGenerator generator) {
         this.texture = texture;
-        this.x = gridX * SIZE;
-        this.z = gridZ * SIZE;
+        this.x = gridX * SIZE/2;
+        this.z = gridZ * SIZE/2;
         this.model = generateTerrain(loader, generator);
     }
 

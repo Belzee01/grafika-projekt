@@ -16,7 +16,7 @@ public class Camera {
 
     private static final float FOV = 70;
     private static final float NEAR_PLANE = 0.4f;
-    private static final float FAR_PLANE = 2500;
+    private static final float FAR_PLANE = 500000;
 
     private static final float Y_OFFSET = 5;
 
@@ -35,6 +35,7 @@ public class Camera {
     }
 
     public void move() {
+        updatePosition();
         calculatePitch();
         calculateAngleAroundPlayer();
         calculateZoom();
@@ -44,6 +45,28 @@ public class Camera {
         this.yaw = 360 - angleAroundPlayer.get();
         yaw %= 360;
         updateViewMatrix();
+    }
+
+    private void updatePosition() {
+        if (Keyboard.isKeyDown(Keyboard.KEY_W)) {
+            position.z -= 0.2f;
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_S)) {
+            position.z += 0.2f;
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_D)) {
+            position.x += 0.2f;
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_A)) {
+            position.x -= 0.2f;
+        }
+
+        if (Keyboard.isKeyDown(Keyboard.KEY_SPACE)) {
+            position.y += 0.2f;
+        }
+        if (Keyboard.isKeyDown(Keyboard.KEY_LSHIFT)) {
+            position.y -= 0.2f;
+        }
     }
 
     private void updateViewMatrix() {
