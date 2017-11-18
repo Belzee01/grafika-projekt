@@ -18,8 +18,6 @@ import static engine.entities.Configs.NEAR_PLANE;
 
 public class MainRender {
 
-
-
     private Matrix4f projectionMatrix;
 
     private ShaderLoader shader = new ShaderLoader();

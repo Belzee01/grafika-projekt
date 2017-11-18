@@ -52,10 +52,6 @@ public abstract class ShaderService {
         GL20.glUniform3f(location, vector.x, vector.y, vector.z);
     }
 
-    protected void loadBoolean(int location, boolean value) {
-        GL20.glUniform1f(location, value ? 1 : 0);
-    }
-
     protected void loadMatrix(int location, Matrix4f matrix) {
         matrix.store(matrixBuffer);
         matrixBuffer.flip();
