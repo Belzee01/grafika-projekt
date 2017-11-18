@@ -12,11 +12,13 @@ import org.lwjgl.util.vector.Matrix4f;
 import java.util.ArrayList;
 import java.util.List;
 
+import static engine.entities.Configs.FAR_PLANE;
+import static engine.entities.Configs.FOV;
+import static engine.entities.Configs.NEAR_PLANE;
+
 public class MainRender {
 
-    private static final float FOV = 70;
-    private static final float NEAR_PLANE = 0.1f;
-    private static final float FAR_PLANE = 1000;
+
 
     private Matrix4f projectionMatrix;
 

@@ -7,16 +7,16 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.util.vector.Matrix4f;
 import org.lwjgl.util.vector.Vector3f;
 
+import static engine.entities.Configs.FAR_PLANE;
+import static engine.entities.Configs.FOV;
+import static engine.entities.Configs.NEAR_PLANE;
+
 @Data
 public class Camera {
 
     private static final float PITCH_SENSITIVITY = 0.3f;
     private static final float YAW_SENSITIVITY = 0.3f;
     private static final float MAX_PITCH = 90;
-
-    private static final float FOV = 70;
-    private static final float NEAR_PLANE = 0.4f;
-    private static final float FAR_PLANE = 500000;
 
     private static final float Y_OFFSET = 5;
 
