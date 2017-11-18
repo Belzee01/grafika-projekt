@@ -1,9 +1,7 @@
 package engine.render;
 
-import engine.entities.Entity;
 import engine.mathutils.Maths;
 import engine.model.RawModel;
-import engine.model.TexturedModel;
 import engine.model.textures.ModelTexture;
 import engine.shaders.TerrainShader;
 import engine.terrain.Terrain;

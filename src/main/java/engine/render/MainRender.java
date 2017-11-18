@@ -1,9 +1,7 @@
 package engine.render;
 
 import engine.entities.Camera;
-import engine.entities.Entity;
 import engine.entities.Light;
-import engine.model.TexturedModel;
 import engine.shaders.ShaderLoader;
 import engine.shaders.TerrainShader;
 import engine.terrain.Terrain;
@@ -12,9 +10,7 @@ import org.lwjgl.opengl.GL11;
 import org.lwjgl.util.vector.Matrix4f;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 public class MainRender {
 
@@ -25,19 +21,15 @@ public class MainRender {
     private Matrix4f projectionMatrix;
 
     private ShaderLoader shader = new ShaderLoader();
-    private EntityRender entityRender;
 
     private TerrainRender terrainRenderer;
     private TerrainShader terrainShader = new TerrainShader();
 
-
-    private Map<TexturedModel, List<Entity>> entities = new HashMap<>();
     private List<Terrain> terrains = new ArrayList<>();
 
     public MainRender() {
         enableCulling();
         createProjectionMatrix();
-        entityRender = new EntityRender(shader, projectionMatrix);
         terrainRenderer = new TerrainRender(terrainShader, projectionMatrix);
     }
 
@@ -57,8 +49,6 @@ public class MainRender {
         shader.loadLight(sun);
         shader.loadViewMatrix(camera);
 
-        entityRender.render(entities);
-
         shader.stop();
 
         terrainShader.start();
@@ -70,7 +60,6 @@ public class MainRender {
         terrainShader.stop();
 
         terrains.clear();
-        entities.clear();
     }
 
     public void processTerrain(Terrain terrain) {
@@ -81,18 +70,6 @@ public class MainRender {
         GL11.glEnable(GL11.GL_DEPTH_TEST);
         GL11.glClear(GL11.GL_COLOR_BUFFER_BIT | GL11.GL_DEPTH_BUFFER_BIT);
         GL11.glClearColor(0.49f, 89f, 0.98f, 1);
-    }
-
-    public void processEntity(Entity entity) {
-        TexturedModel entityModel = entity.getTexturedModel();
-        List<Entity> batch = entities.get(entityModel);
-        if (batch != null) {
-            batch.add(entity);
-        } else {
-            List<Entity> newBatch = new ArrayList<Entity>();
-            newBatch.add(entity);
-            entities.put(entityModel, newBatch);
-        }
     }
 
     public void cleanUp() {
