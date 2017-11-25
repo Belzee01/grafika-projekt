@@ -7,8 +7,7 @@ import engine.model.loaders.Loader;
 import engine.model.textures.ModelTexture;
 import engine.render.DisplayManager;
 import engine.render.MainRender;
-import engine.terrain.HeightsGenerator;
-import engine.terrain.Terrain;
+import engine.terrain.*;
 import org.lwjgl.opengl.Display;
 
 public class MainLoop {
@@ -19,9 +18,8 @@ public class MainLoop {
         Loader loader = new Loader();
 
         Light light = new Light(Configs.LIGHT_POS, Configs.LIGHT_COL);
-        HeightsGenerator generator = new HeightsGenerator(111111, Configs.OCTAVES, Configs.AMPLITUDE, Configs.ROUGHNESS);
+        NoiseGenerator generator = new ImprovedPerlinNoiseGenerator(1111);
         Terrain terrain = new Terrain(-1, -1, loader, new ModelTexture(loader.loadTexture("grass")), generator);
-
 
         Camera camera = new Camera();
         MainRender renderer = new MainRender();

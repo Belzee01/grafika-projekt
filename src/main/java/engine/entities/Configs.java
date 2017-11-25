@@ -7,7 +7,7 @@ public class Configs {
 
     public static final int FPS_CAP = 100;
 
-    public static Vector3f LIGHT_POS = new Vector3f(0.3f, -1f, 0.5f);
+    public static Vector3f LIGHT_POS = new Vector3f(10.0f, 1000f, 0.5f);
     public static Vector3f LIGHT_COL = new Vector3f(1f, 0.8f, 0.8f);
 
     public static final int TERRAIN_SIZE = 100;

@@ -2,21 +2,22 @@ package engine.terrain;
 
 import java.util.Random;
 
-public class HeightsGenerator {
+public class ValueNoiseGenerator implements NoiseGenerator {
 
     private final int seed;
     private final float roughness;
     private final int octaves;
     private final float amplitude;
 
-    public HeightsGenerator(int seed, int octaves, float amplitude, float roughness) {
+    public ValueNoiseGenerator(int seed, int octaves, float amplitude, float roughness) {
         this.seed = seed;
         this.octaves = octaves;
         this.amplitude = amplitude;
         this.roughness = roughness;
     }
 
-    public float getPerlinNoise(int x, int y) {
+    @Override
+    public float getNoiseHeight(int x, int y) {
         float total = 0;
         float d = (float) Math.pow(2, octaves - 1);
         for (int i = 0; i < octaves; i++) {

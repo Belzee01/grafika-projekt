@@ -20,14 +20,14 @@ public class Terrain {
     @Getter
     private ModelTexture texture;
 
-    public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture, HeightsGenerator generator) {
+    public Terrain(int gridX, int gridZ, Loader loader, ModelTexture texture, NoiseGenerator generator) {
         this.texture = texture;
         this.x = gridX * SIZE/2;
         this.z = gridZ * SIZE/2;
         this.model = generateTerrain(loader, generator);
     }
 
-    private RawModel generateTerrain(Loader loader, HeightsGenerator generator) {
+    private RawModel generateTerrain(Loader loader, NoiseGenerator generator) {
 
         int count = VERTEX_COUNT * VERTEX_COUNT;
         float[][] heights = new float[VERTEX_COUNT][VERTEX_COUNT];
@@ -76,7 +76,7 @@ public class Terrain {
         return loader.loadToVAO(vertices, textureCoords, normals, indices);
     }
 
-    private Vector3f calculateNormal(int x, int z, HeightsGenerator generator) {
+    private Vector3f calculateNormal(int x, int z, NoiseGenerator generator) {
         float heightL = getHeight(x - 1, z, generator);
         float heightR = getHeight(x + 1, z, generator);
         float heightD = getHeight(x, z - 1, generator);
@@ -87,7 +87,9 @@ public class Terrain {
         return normal;
     }
 
-    private float getHeight(int x, int z, HeightsGenerator generator) {
-        return generator.getPerlinNoise(x, z);
+    private float getHeight(int x, int z, NoiseGenerator generator) {
+        float height = generator.getNoiseHeight(x, z);
+
+        return height;
     }
 }
