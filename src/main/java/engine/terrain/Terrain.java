@@ -30,7 +30,6 @@ public class Terrain {
     private RawModel generateTerrain(Loader loader, NoiseGenerator generator) {
 
         int count = VERTEX_COUNT * VERTEX_COUNT;
-        float[][] heights = new float[VERTEX_COUNT][VERTEX_COUNT];
 
         float[] vertices = new float[count * 3];
         float[] normals = new float[count * 3];
@@ -43,7 +42,6 @@ public class Terrain {
                 vertices[vertexPointer * 3] = (float) j / ((float) VERTEX_COUNT - 1) * SIZE;
                 float height = getHeight(j, i, generator);
                 vertices[vertexPointer * 3 + 1] = height;
-                heights[j][i] = height;
                 vertices[vertexPointer * 3 + 2] = (float) i / ((float) VERTEX_COUNT - 1) * SIZE;
 
                 Vector3f normal = calculateNormal(j, i, generator);
@@ -88,8 +86,6 @@ public class Terrain {
     }
 
     private float getHeight(int x, int z, NoiseGenerator generator) {
-        float height = generator.getNoiseHeight(x, z);
-
-        return height;
+        return generator.getNoiseHeight(x, z);
     }
 }
