@@ -1,6 +1,11 @@
 package engine.terrain;
 
-public interface NoiseGenerator {
+public abstract class NoiseGenerator {
 
-    float getNoiseHeight(int x, int y);
+    public abstract float getNoiseHeight(int x, int y);
+
+    protected int seed;
+    protected float roughness;
+    protected int octaves;
+    protected float amplitude;
 }

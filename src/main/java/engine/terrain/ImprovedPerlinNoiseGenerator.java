@@ -3,9 +3,7 @@ package engine.terrain;
 import java.util.Arrays;
 import java.util.Random;
 
-public class ImprovedPerlinNoiseGenerator implements NoiseGenerator {
-
-    private int seed;
+public class ImprovedPerlinNoiseGenerator extends NoiseGenerator {
 
     private final Integer[] p = new Integer[512];
     private Integer[] permutation = {151, 160, 137, 91, 90, 15,
@@ -23,26 +21,29 @@ public class ImprovedPerlinNoiseGenerator implements NoiseGenerator {
             138, 236, 205, 93, 222, 114, 67, 29, 24, 72, 243, 141, 128, 195, 78, 66, 215, 61, 156, 180
     };
 
-    public ImprovedPerlinNoiseGenerator(int seed) {
+    public ImprovedPerlinNoiseGenerator(int seed, int octaves, float amplitude, float roughness) {
         this.seed = seed;
+        this.octaves = octaves;
+        this.amplitude = amplitude;
+        this.roughness = roughness;
 
         seed = seed | 1337;
         this.permutation = new Integer[512];
 
         Random generator = new Random(seed);
 
-        for (int i = 0; i < 256; i++)  {
+        for (int i = 0; i < 256; i++) {
             this.permutation[i] = i;
         }
         for (int i = 0; i < 256; i++) {
-            int k = generator.nextInt( 256 - i ) + i; //(256 - i) + i;
+            int k = generator.nextInt(256 - i) + i; //(256 - i) + i;
             int l = this.permutation[i];
             this.permutation[i] = this.permutation[k];
             this.permutation[k] = l;
             this.permutation[i + 256] = this.permutation[i];
         }
-        for (int i=0; i < 256 ; i++) {
-            this.p[256+i] = this.p[i] = this.permutation[i];
+        for (int i = 0; i < 256; i++) {
+            this.p[256 + i] = this.p[i] = this.permutation[i];
         }
         System.out.println(Arrays.toString(this.permutation));
     }
@@ -94,6 +95,13 @@ public class ImprovedPerlinNoiseGenerator implements NoiseGenerator {
 
     @Override
     public float getNoiseHeight(int x, int y) {
-        return (float) noise((x / 10.0) + (double) this.seed, (y / 10.0) + (double) this.seed, 0.0) * 10.0f;
+        float total = 0;
+        float d = (float) Math.pow(2, octaves - 1);
+        for (int i = 0; i < octaves; i++) {
+            float freq = (float) (Math.pow(2, i) / d);
+            float amp = (float) Math.pow(roughness, i) * amplitude;
+            total += (float) noise((x * freq), (y *freq), 0.0) * amp;
+        }
+        return total;
     }
 }

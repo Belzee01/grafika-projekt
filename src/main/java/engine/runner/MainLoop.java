@@ -18,7 +18,7 @@ public class MainLoop {
         Loader loader = new Loader();
 
         Light light = new Light(Configs.LIGHT_POS, Configs.LIGHT_COL);
-        NoiseGenerator generator = new ImprovedPerlinNoiseGenerator(22325225);
+        NoiseGenerator generator = new ValueNoiseGenerator(22325225, 4, 25.0f, 0.09f);
         Terrain terrain = new Terrain(-1, -1, loader, new ModelTexture(loader.loadTexture("grass")), generator);
 
         Camera camera = new Camera();
@@ -36,6 +36,5 @@ public class MainLoop {
         renderer.cleanUp();
         loader.cleanUpMemory();
         DisplayManager.closeDisplay();
-
     }
 }

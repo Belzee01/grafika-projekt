@@ -12,10 +12,6 @@ public class Configs {
 
     public static final int TERRAIN_SIZE = 100;
 
-    public static final float AMPLITUDE = 110;
-    public static final float ROUGHNESS = 0.35f;
-    public static final int OCTAVES = 5;
-
     public static final float FOV = 70;
     public static final float NEAR_PLANE = 0.1f;
     public static final float FAR_PLANE = 50000;

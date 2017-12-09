@@ -2,12 +2,7 @@ package engine.terrain;
 
 import java.util.Random;
 
-public class ValueNoiseGenerator implements NoiseGenerator {
-
-    private final int seed;
-    private final float roughness;
-    private final int octaves;
-    private final float amplitude;
+public class ValueNoiseGenerator extends NoiseGenerator {
 
     public ValueNoiseGenerator(int seed, int octaves, float amplitude, float roughness) {
         this.seed = seed;
