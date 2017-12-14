@@ -7,8 +7,8 @@ import org.lwjgl.util.vector.Matrix4f;
 
 public class ShaderLoader extends ShaderService {
 
-    private static final String VERTEX_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\shaders\\" + "vertexShader.txt";
-    private static final String FRAGMENT_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\shaders\\" + "fragmentShader.txt";
+    private static final String VERTEX_FILE = "assests/shaders/" + "vertexShader.txt";
+    private static final String FRAGMENT_FILE = "assests/shaders/" + "fragmentShader.txt";
 
     private int location_viewMatrix;
     private int location_lightPosition;

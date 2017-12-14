@@ -39,7 +39,7 @@ public class Loader {
         Texture texture = null;
         try {
             texture = TextureLoader.getTexture("PNG", new FileInputStream(
-                    "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\" + filename + ".png"
+                    "assests/" + filename + ".png"
             ));
             int textureId = texture.getTextureID();
             textureIds.add(textureId);

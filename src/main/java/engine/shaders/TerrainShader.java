@@ -7,8 +7,8 @@ import org.lwjgl.util.vector.Matrix4f;
 
 public class TerrainShader extends ShaderService {
 
-    private static final String VERTEX_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\shaders\\" + "terrainVertexShader.txt";
-    private static final String FRAGMENT_FILE = "C:\\Users\\Belzee\\IdeaProjects\\graphics-project\\src\\main\\resources\\shaders\\" + "terrainFragmentShader.txt";
+    private static final String VERTEX_FILE = "assests/shaders/" + "terrainVertexShader.txt";
+    private static final String FRAGMENT_FILE = "assests/shaders/" + "terrainFragmentShader.txt";
 
     private int location_transformationMatrix;
     private int location_projectionMatrix;
