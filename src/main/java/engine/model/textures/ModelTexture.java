@@ -8,8 +8,8 @@ import lombok.experimental.Accessors;
 public class ModelTexture {
     private int textureId;
 
-    private float shineDamper = 1;
-    private float reflectivity = 0;
+    private float shineDamper = 0.9f;
+    private float reflectivity = 0.2f;
 
     private Boolean hasTransparency = false;
     private Boolean fakeLighting = false;
