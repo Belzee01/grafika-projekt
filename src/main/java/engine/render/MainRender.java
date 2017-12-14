@@ -2,7 +2,6 @@ package engine.render;
 
 import engine.entities.Camera;
 import engine.entities.Light;
-import engine.shaders.ShaderLoader;
 import engine.shaders.TerrainShader;
 import engine.terrain.Terrain;
 import org.lwjgl.opengl.Display;
@@ -12,15 +11,11 @@ import org.lwjgl.util.vector.Matrix4f;
 import java.util.ArrayList;
 import java.util.List;
 
-import static engine.entities.Configs.FAR_PLANE;
-import static engine.entities.Configs.FOV;
-import static engine.entities.Configs.NEAR_PLANE;
+import static engine.entities.Configs.*;
 
 public class MainRender {
 
     private Matrix4f projectionMatrix;
-
-    private ShaderLoader shader = new ShaderLoader();
 
     private TerrainRender terrainRenderer;
     private TerrainShader terrainShader = new TerrainShader();
@@ -40,12 +35,6 @@ public class MainRender {
 
     public void render(Light sun, Camera camera) {
         setUp();
-
-        shader.start();
-        shader.loadLight(sun);
-        shader.loadViewMatrix(camera);
-
-        shader.stop();
 
         terrainShader.start();
         terrainShader.loadLight(sun);
@@ -69,7 +58,6 @@ public class MainRender {
     }
 
     public void cleanUp() {
-        shader.cleanUp();
         terrainShader.cleanUp();
     }
 
